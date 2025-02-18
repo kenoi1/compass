@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Compass
+Exec=compass
+Icon=delete
+Type=Application
+Terminal=false
+Categories=Utility
