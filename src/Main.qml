@@ -3,11 +3,17 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as Controls
 import org.kde.kirigami as Kirigami
+import QtSensors
+
+
 
 // Provides basic features needed for all kirigami applications
 Kirigami.ApplicationWindow {
     // Unique identifier to reference this object
     id: root
+
+    property alias isActive: compass.active
+    property real azimuth: 30
 
     width: 400
     height: 300
@@ -23,7 +29,16 @@ Kirigami.ApplicationWindow {
         Controls.Label {
             // Center label horizontally and vertically within parent object
             anchors.centerIn: parent
-            text: i18n("Hello World!")
+            text: i18n("Hello World!" + root.azimuth)
+
         }
+
+        Compass {
+            id: compass
+            active: true
+            dataRate: 7
+            onReadingChanged: root.azimuth = -(reading as CompassReading).azimuth
+        }
+
     }
 }
